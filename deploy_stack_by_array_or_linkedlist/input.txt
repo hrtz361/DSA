@@ -1,0 +1,13 @@
+5
+
+push 28
+push 53
+push 82
+push 31
+top
+pop
+size
+pop
+pop
+pop
+isEmpty
