@@ -1,26 +1,17 @@
-/*
- * Chuong 3 - Bai 1: Cai dat ngan xep (stack) bang mang va danh sach lien ket.
- *
+/* 
  * Cach dung:
  *     ./stack array  < input.txt     (cai dat bang mang, mac dinh)
  *     ./stack list   < input.txt     (cai dat bang danh sach lien ket)
- *
- * Khuon dang input:
- *     dong 1 : so nguyen N  (dung luong toi da; cach "list" bo qua N)
- *     cac dong tiep theo : mot lenh moi dong, den het file
- *         push x | pop | top | isEmpty | isFull | size | clear
- *
- * Output: moi lenh pop/top/isEmpty/isFull/size in mot dong ket qua.
- *         Loi in "Stack tràn" hoac "Stack rỗng", trang thai stack khong doi.
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-/* =====================================================================
- * CACH 1: CAI DAT BANG MANG
- * ===================================================================== */
+
+
+
+// su dung array 
 typedef struct {
     int *data;      /* mang chua cac phan tu                       */
     int  top;       /* chi so phan tu o dinh; -1 khi stack rong    */
@@ -77,10 +68,10 @@ int as_top(const ArrayStack *s, int *out) {
 /* Lam rong stack: chi can dat lai top. O(1) */
 void as_clear(ArrayStack *s) { s->top = -1; }
 
-/* =====================================================================
- * CACH 2: CAI DAT BANG DANH SACH LIEN KET DON
- * Dinh stack = nut dau danh sach (head): them/xoa o dau deu O(1).
- * ===================================================================== */
+
+
+
+// su dung danh sach lien ket 
 typedef struct Node {
     int data;               /* gia tri cua nut                         */
     struct Node *next;      /* tro toi nut nam ngay ben duoi           */
@@ -145,10 +136,8 @@ void ls_destroy(ListStack *s) {
     ls_clear(s);
     free(s);
 }
+// read and execute commands from input.txt 
 
-/* =====================================================================
- * DOC LENH VA THUC THI
- * ===================================================================== */
 static void print_bool(int b) { puts(b ? "true" : "false"); }
 
 /* Chay chuoi lenh tren stack cai dat bang mang. Tong thoi gian O(Q). */
@@ -175,7 +164,7 @@ static void run_array(int n) {
         } else if (strcmp(cmd, "clear") == 0) {
             as_clear(s);
         } else {
-            fprintf(stderr, "Lenh khong hop le: %s\n", cmd);
+            fprintf(stderr,"Lenh khong hop le: %s\n", cmd);
         }
     }
     as_destroy(s);
@@ -211,15 +200,19 @@ static void run_list(void) {
     ls_destroy(s);
 }
 
+
+
+
+
 int main(int argc, char *argv[]) {
     int n;
     if (scanf("%d", &n) != 1) {                 /* doc dung luong N */
-        fprintf(stderr, "Thieu dung luong N o dong dau\n");
+        fprintf(stderr,"Thieu dung luong N o dong dau\n");
         return 1;
     }
     if (argc > 1 && strcmp(argv[1], "list") == 0)
-        run_list();
+    {run_list();printf("use_linkedlist");} 
     else
-        run_array(n);
+    {run_array(n); printf("use_array");}
     return 0;
 }
